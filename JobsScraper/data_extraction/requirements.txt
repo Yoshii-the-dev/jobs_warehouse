@@ -1,0 +1,11 @@
+#selenium==4.11.2
+#Scrapy==2.10.0
+webdriver-manager
+urllib3
+python-dotenv
+psycopg2-binary
+selenium
+dateparser==1.2.0
+itemloaders
+#Twisted==22.10.0
+#pymongo

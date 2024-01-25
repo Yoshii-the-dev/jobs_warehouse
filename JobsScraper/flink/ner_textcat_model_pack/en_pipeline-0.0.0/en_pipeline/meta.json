@@ -1,0 +1,63 @@
+{
+  "lang":"en",
+  "name":"pipeline",
+  "version":"0.0.0",
+  "description":"",
+  "author":"",
+  "email":"",
+  "url":"",
+  "license":"",
+  "spacy_version":">=3.6.1,<3.7.0",
+  "spacy_git_version":"458bc5f45",
+  "vectors":{
+    "width":0,
+    "vectors":0,
+    "keys":0,
+    "name":null
+  },
+  "labels":{
+    "tok2vec":[
+
+    ],
+    "ner":[
+      "Toolset"
+    ],
+    "textcat":[
+      "Data Scientist",
+      "Data Analyst",
+      "Machine Learning Engineer",
+      "Data Engineer",
+      "Other"
+    ]
+  },
+  "pipeline":[
+    "tok2vec",
+    "ner",
+    "textcat"
+  ],
+  "components":[
+    "tok2vec",
+    "ner",
+    "textcat"
+  ],
+  "disabled":[
+
+  ],
+  "performance":{
+    "ents_f":1.0,
+    "ents_p":1.0,
+    "ents_r":1.0,
+    "ents_per_type":{
+      "Toolset":{
+        "p":1.0,
+        "r":1.0,
+        "f":1.0
+      }
+    },
+    "tok2vec_loss":22.1059781626,
+    "ner_loss":2.0173960004
+  },
+  "requirements":[
+
+  ]
+}

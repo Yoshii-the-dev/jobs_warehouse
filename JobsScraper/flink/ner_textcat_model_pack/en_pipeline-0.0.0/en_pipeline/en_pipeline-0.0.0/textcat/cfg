@@ -1,0 +1,11 @@
+{
+  "labels":[
+    "Data Scientist",
+    "Data Analyst",
+    "Machine Learning Engineer",
+    "Data Engineer",
+    "Other"
+  ],
+  "threshold":0.0,
+  "positive_label":null
+}

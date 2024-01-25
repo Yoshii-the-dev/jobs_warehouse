@@ -1,0 +1,101 @@
+version: '3.4'
+services:
+  data_extraction:
+    build:
+      context: /data_extraction
+      dockerfile: Dockerfile
+    image: crawler_image
+    container_name: data_extraction_container
+    depends_on:
+      - postgresdb
+    env_file:
+      - .env
+    networks:
+      - datajobs
+
+  postgresdb:
+    image: postgres:16-alpine3.19
+    container_name: postgresdb_container
+    hostname: postgresdb_container
+    ports:
+     - "5432:5432"
+    environment:
+     POSTGRES_USER: ${POSTGRES_USER}
+     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+     POSTGRES_DB: ${POSTGRES_DB}
+     APP_DB_USER: ${APP_DB_USER}
+     APP_DB_PASS: ${APP_DB_PASS}
+     APP_DB_NAME: ${APP_DB_NAME}
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command:
+      - postgres
+      - -c
+      - log_statement=all
+    volumes:
+     - ./postgres-init-scheme.sh:/docker-entrypoint-initdb.d/postgres-init-scheme.sh
+    # - ./postgres-data:/var/lib/postgresql/data
+    networks:
+     - datajobs
+
+  jobmanager:
+    build: 
+      context: /flink
+      dockerfile: Dockerfile
+    image: pyflink_image
+    container_name: jobmanager_container
+    ports:
+      - "8081:8081"
+    command: jobmanager
+    entrypoint: 
+            - bash
+            - -c
+            - |
+                ./bin/start-cluster.sh
+                ./bin/flink run --python descriptions_first_processing_job_dev.py --pyFiles udfs.py
+    #volumes:
+      #- ./jars/flink-connector-jdbc-3.1.1-1.17.jar:/opt/flink/lib/flink-connector-jdbc-3.1.1-1.17.jar
+      #- ./jars/flink-sql-connector-mongodb-cdc-2.1.1.jar:/opt/flink/lib/flink-sql-connector-mongodb-cdc-2.1.1.jar
+      #- ./jars/flink-sql-connector-postgres-cdc-2.1.1.jar:/opt/flink/lib/flink-sql-connector-postgres-cdc-2.1.1.jar
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        rest.flamegraph.enabled: true
+    depends_on:
+      - data_extraction
+    env_file:
+      - .env
+    networks:
+      - datajobs
+
+  taskmanager:
+    image: pyflink_image
+    container_name: taskmanager_container
+    depends_on:
+      - jobmanager
+    command: taskmanager
+    scale: 1
+    #entrypoint: 
+    #       - bash
+    #        - -c
+    #        - |
+    #            wget https://github.com/async-profiler/async-profiler/releases/download/v2.9/async-profiler-2.9-linux-x64.tar.gz
+    #            tar -zxvf async-profiler-2.9-linux-x64.tar.gz
+    #            cd async-profiler-2.9-linux-x64
+    #            ./profiler.sh -d 60 -f /tmp/flamegraph.html 1
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 10
+        parallelism.default: 2
+    networks:
+      - datajobs
+
+networks:
+  datajobs:
+
