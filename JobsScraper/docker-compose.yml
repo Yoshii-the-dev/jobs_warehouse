@@ -2,7 +2,7 @@ version: '3.4'
 services:
   data_extraction:
     build:
-      context: /data_extraction
+      context: JobsScraper/data_extraction
       dockerfile: Dockerfile
     image: crawler_image
     container_name: data_extraction_container
