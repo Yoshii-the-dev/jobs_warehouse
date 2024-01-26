@@ -1,0 +1,18 @@
+name: run ETL jobs
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Schedule to run every 12 hours
+
+jobs:
+  run_docker_compose:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build and run Docker Compose
+      run: |
+        docker-compose -f JobsScraper/docker-compose.yml build
+        docker-compose -f JobsScraper/docker-compose.yml up -d
