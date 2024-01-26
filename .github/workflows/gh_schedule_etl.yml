@@ -2,7 +2,7 @@ name: run ETL jobs
 
 on:
   schedule:
-    - cron: '0 */12 * * *'  # Schedule to run every 12 hours
+    - cron: '*/15 * * * *'  # Schedule to run every 12 hours
 
 jobs:
   run_docker_compose:
