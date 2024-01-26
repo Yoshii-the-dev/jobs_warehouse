@@ -41,7 +41,7 @@ services:
 
   jobmanager:
     build: 
-      context: /flink
+      context: ./flink
       dockerfile: Dockerfile
     image: pyflink_image
     container_name: jobmanager_container
