@@ -65,8 +65,6 @@ services:
         rest.flamegraph.enabled: true
     depends_on:
       - data_extraction
-    env_file:
-      - .env
     networks:
       - datajobs
 
