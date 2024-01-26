@@ -8,8 +8,6 @@ services:
     container_name: data_extraction_container
     depends_on:
       - postgresdb
-    env_file:
-      - .env
     networks:
       - datajobs
 
