@@ -56,20 +56,21 @@ class WorkableJobSpider(scrapy.Spider):
         driver.page_source
         wait = WebDriverWait(driver, 5)
     
-    
-        while True:
+        clicks = 30
+        while clicks>=0:
             try:
-                time.sleep(1)
+                clicks -= 1
+                time.sleep(3)
                 button = wait.until(EC.visibility_of_element_located((
                     By.XPATH, "//button[@data-ui='load-more-button']")))
                 button.click()
-                yield scrapy.Request(url='https://jobs.workable.com/search?remote=false', 
-                             headers={'User-Agent':self.user_agents[random.randint(0,len(self.user_agents)-1)]}, 
-                             callback=self.parse, 
-                             meta={'driver':driver})
             except Exception as e:
                 logging.error(e)
                 break
+        yield scrapy.Request(url='https://jobs.workable.com/search?remote=false', 
+             headers={'User-Agent':self.user_agents[random.randint(0,len(self.user_agents)-1)]}, 
+             callback=self.parse, 
+             meta={'driver':driver})
         
 
 
@@ -80,7 +81,7 @@ class WorkableJobSpider(scrapy.Spider):
         last_updated = datetime.now().strftime("%Y-%m-%d %H:%M")
         last_updated = datetime.strptime(last_updated, "%Y-%m-%d %H:%M")
         for result in results[::2]:
-            time.sleep(1)
+            time.sleep(2)
             driver.execute_script("arguments[0].click();", result)
             url = driver.current_url
 
