@@ -21,4 +21,4 @@ jobs:
     - name: Build and run Docker Compose
       run:
         docker-compose -f JobsScraper/docker-compose.yml up
-        docker-compose -f JobsScraper/docker-compose.yml wait jobmanager_container --down-project
+        docker-compose -f JobsScraper/docker-compose.yml wait jobmanager --down-project
