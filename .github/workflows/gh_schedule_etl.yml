@@ -19,6 +19,6 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build and run Docker Compose
-      run:
+      run: |
         docker-compose -f JobsScraper/docker-compose.yml up
         docker-compose -f JobsScraper/docker-compose.yml wait jobmanager --down-project
