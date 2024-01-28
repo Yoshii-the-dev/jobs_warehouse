@@ -44,6 +44,7 @@ class PostgreSQLPipeline:
         TRUNCATE TABLE landing_zone_schema.clean_jobs_table;
         '''
         self.cursor.execute(truncate_sql)
+        self.connection.commit()
 
 
     def process_item(self, item, spider):
