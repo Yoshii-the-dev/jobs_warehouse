@@ -1,21 +1,3 @@
-#FROM python:3.9.0
-
- 
-# Set the working directory to /usr/src/app.
-#WORKDIR /JobsScraper/data_extraction
- 
-# Copy the file from the local host to the filesystem of the container at the working directory.
-#COPY requirements.txt ./
- 
-# Install Scrapy specified in requirements.txt.
-##RUN pip3 install --no-cache-dir -r requirements.txt
- 
-# Copy the project source code from the local host to the filesystem of the container at the working directory.
-#COPY . .
- 
-# Run the crawler when the container launches.
-#CMD [ "python3", "./start_crawling.py" ]
-
 
 FROM scrapinghub/scrapinghub-stack-scrapy:2.1
 RUN apt-get update
