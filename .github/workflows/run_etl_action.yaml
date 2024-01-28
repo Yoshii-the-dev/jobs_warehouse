@@ -1,0 +1,15 @@
+name: run_etl
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: build and run dc
+        run: docker-compose -f /JobsScraper/docker-compose.yaml start postgresdb
