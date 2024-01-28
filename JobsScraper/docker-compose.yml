@@ -64,7 +64,8 @@ services:
         jobmanager.rpc.address: jobmanager
         rest.flamegraph.enabled: true
     depends_on:
-      - data_extraction
+      data_extraction:
+        condition: service_completed_successfully
     networks:
       - datajobs
 
