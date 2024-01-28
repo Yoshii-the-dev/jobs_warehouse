@@ -66,13 +66,6 @@ class PostgreSQLPipeline:
         self.connection.commit()
         return item
 
-#    def __filter__(self):
-#        max_timestamp_query = "SELECT metadata_lastupdated FROM raw_descriptions ORDER BY metadata_lastupdated DESC LIMIT 1;"
-#        self.cursor.execute(max_timestamp_query)
-#        max_timestamp = self.cursor.fetchone()[0]
-#        delete_query = "DELETE FROM raw_descriptions WHERE metadata_lastupdated < %s;"
-#        self.cursor.execute(delete_query, (max_timestamp,))
-
     def close_spider(self, spider):
         self.cursor.close()
         logging.info("Closing Connection")
