@@ -14,4 +14,4 @@ jobs:
       - name: build and run dc
         with: 
           context: .
-        run: docker-compose -f ./JobsScraper/docker-compose.yml start postgresdb
+        run: docker-compose -f /JobsScraper/docker-compose.yml start postgresdb
