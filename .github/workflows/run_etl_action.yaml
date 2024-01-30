@@ -12,5 +12,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: build and run dc
-        run: docker-compose -f JobsScraper/docker-compose.yml start postgresdb
+        run: docker-compose -f JobsScraper/docker-compose.yml up postgresdb
         #docker compose wait SERVICE [SERVICE...] [OPTIONS]
