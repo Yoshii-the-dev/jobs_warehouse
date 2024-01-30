@@ -1,0 +1,21 @@
+name: run_etl
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Create .env file
+        run: |
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" > .env
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
+          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env
+          echo "APP_DB_USER=${{ secrets.APP_DB_USER }}" >> .env
+          echo "APP_DB_PASS=${{ secrets.APP_DB_PASS }}" >> .env
+          echo "APP_DB_NAME=${{ secrets.APP_DB_NAME }}" >> .env
+      - name: up postgres
+        run: docker-compose up
