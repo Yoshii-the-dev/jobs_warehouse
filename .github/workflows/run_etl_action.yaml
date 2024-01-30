@@ -7,6 +7,8 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
+      - name: Lint Action
+      - uses: wearerequired/lint-action@v2.3.0
       - name: Checkout code
       - uses: actions/checkout@v3
       - uses: isbang/compose-action@v1.5.1
