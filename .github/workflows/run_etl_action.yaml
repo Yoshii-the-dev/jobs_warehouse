@@ -7,11 +7,10 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - name: Lint Action
-      - uses: wearerequired/lint-action@v2.3.0
       - name: Checkout code
-      - uses: actions/checkout@v3
-      - uses: isbang/compose-action@v1.5.1
+        uses: actions/checkout@v3
+      - name: docker compose act
+        uses: isbang/compose-action@v1.5.1
         with:
           compose-file: "JobsScraper/docker-compose.yml"
         env: 
