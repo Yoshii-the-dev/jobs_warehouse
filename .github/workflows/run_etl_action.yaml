@@ -9,6 +9,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Create .env file
+        run: |
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" > .env
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
+          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env
+          echo "APP_DB_USER=${{ secrets.APP_DB_USER }}" >> .env
+          echo "APP_DB_PASS=${{ secrets.APP_DB_PASS }}" >> .env
+          echo "APP_DB_NAME=${{ secrets.APP_DB_NAME }}" >> .env
       - name: docker compose act
         uses: isbang/compose-action@v1.5.1
         with:
