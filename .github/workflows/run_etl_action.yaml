@@ -22,5 +22,5 @@ jobs:
           echo "APP_DB_PASS=${{ secrets.APP_DB_PASS }}" >> .env
           echo "APP_DB_NAME=${{ secrets.APP_DB_NAME }}" >> .env
       - name: build and run dc
-        run: docker-compose -f JobsScraper/docker-compose.yml up postgresdb
+        run: docker-compose --env-file .env -f JobsScraper/docker-compose.yml up postgresdb
         #docker compose wait SERVICE [SERVICE...] [OPTIONS]
