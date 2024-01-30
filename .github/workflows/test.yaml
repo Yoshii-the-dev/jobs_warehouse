@@ -18,4 +18,4 @@ jobs:
           echo "APP_DB_PASS=${{ secrets.APP_DB_PASS }}" >> .env
           echo "APP_DB_NAME=${{ secrets.APP_DB_NAME }}" >> .env
       - name: up postgres
-        run: docker-compose -f JobsScraper/docker-compose.yml up postgresdb
+        run: docker-compose -e POSTGRES_USER=${{ secrets.POSTGRES_USER }} -e POSTGRESS_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} -f JobsScraper/docker-compose.yml up postgresdb
