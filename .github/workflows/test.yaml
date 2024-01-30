@@ -20,4 +20,4 @@ jobs:
           echo "APP_DB_NAME=jobs_warehouse" >> .env
           cat .env
       - name: up postgres
-        run: docker-compose --env-file .env -f JobsScraper/docker-compose.yml up postgresdb
+        run: docker-compose -f JobsScraper/docker-compose.yml up postgresdb
