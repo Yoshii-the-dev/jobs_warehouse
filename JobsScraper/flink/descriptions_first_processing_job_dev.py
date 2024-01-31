@@ -18,9 +18,9 @@ import time
 
 def raw_html_processing():
     
-    load_dotenv('.env')
-    APP_DB_USER = os.getenv('APP_DB_USER')
-    APP_DB_PASS = os.getenv('APP_DB_PASS')
+    #load_dotenv('.env')
+    APP_DB_USER = os.environ['APP_DB_USER']
+    APP_DB_PASS = os.environ['APP_DB_PASS']
 #========================= SET UP PROCESSING CONFIG ============================================
     SRC_DIR = os.path.dirname(os.path.realpath(__file__))
     jar_files = [
