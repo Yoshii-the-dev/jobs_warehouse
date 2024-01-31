@@ -12,12 +12,12 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo "POSTGRES_USER=postgres" >> .env
-          echo "POSTGRES_PASSWORD=postgres123" >> .env
-          echo "POSTGRES_DB=postgres" >> .env
-          echo "APP_DB_USER=data_wrangler_rw" >> .env
-          echo "APP_DB_PASS=data_wrangler_rw123" >> .env
-          echo "APP_DB_NAME=jobs_warehouse" >> .env
+          echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
+          echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
+          echo POSTGRES_DB=${{ secrets.POSTGRES_DB }} >> .env
+          echo APP_DB_USER=${{ secrets.APP_DB_USER }} >> .env
+          echo APP_DB_PASS=${{ secrets.APP_DB_PASS }} >> .env
+          echo APP_DB_NAME=${{ secrets.APP_DB_NAME }} >> .env
           cat .env
       - name: up postgres
         run: docker-compose -f JobsScraper/docker-compose.yml up postgresdb
