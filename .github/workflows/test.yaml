@@ -29,7 +29,7 @@ jobs:
           APP_DB_PASS: ${{ secrets.APP_DB_PASS }}
           APP_DB_NAME: ${{ secrets.APP_DB_NAME }}
       - name: up data_extraction
-        run: docker-compose -f JobsScraper/docker-compose.yml up -f data_extraction
+        run: docker-compose -f JobsScraper/docker-compose.yml up data_extraction
         env: 
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
