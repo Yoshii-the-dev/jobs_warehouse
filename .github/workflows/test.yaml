@@ -19,8 +19,9 @@ jobs:
           echo APP_DB_PASS=${{ secrets.APP_DB_PASS }} >> .env
           echo APP_DB_NAME=${{ secrets.APP_DB_NAME }} >> .env
           cat .env
-      - name: up postgres
-        run: docker-compose -f JobsScraper/docker-compose.yml up -d postgresdb
+      - name: up postgres and data extraction
+        run: |
+          docker-compose -f JobsScraper/docker-compose.yml up -d postgresdb data_extraction
         env: 
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
@@ -28,12 +29,4 @@ jobs:
           APP_DB_USER: ${{ secrets.APP_DB_USER }}
           APP_DB_PASS: ${{ secrets.APP_DB_PASS }}
           APP_DB_NAME: ${{ secrets.APP_DB_NAME }}
-      - name: up data_extraction
-        run: docker-compose -f JobsScraper/docker-compose.yml up data_extraction
-        env: 
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-          APP_DB_USER: ${{ secrets.APP_DB_USER }}
-          APP_DB_PASS: ${{ secrets.APP_DB_PASS }}
-          APP_DB_NAME: ${{ secrets.APP_DB_NAME }}
+
