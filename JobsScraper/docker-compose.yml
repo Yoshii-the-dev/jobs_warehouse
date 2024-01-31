@@ -6,6 +6,9 @@ services:
       dockerfile: Dockerfile
     image: crawler_image
     container_name: data_extraction_container
+    environment:
+     POSTGRES_USER: ${POSTGRES_USER}
+     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     depends_on:
       - postgresdb
     networks:
