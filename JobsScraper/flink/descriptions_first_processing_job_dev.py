@@ -18,7 +18,7 @@ import time
 
 def raw_html_processing():
     
-    #load_dotenv('.env')
+    load_dotenv('.env')
     APP_DB_USER = os.environ['APP_DB_USER']
     APP_DB_PASS = os.environ['APP_DB_PASS']
 #========================= SET UP PROCESSING CONFIG ============================================
