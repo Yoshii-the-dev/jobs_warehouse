@@ -26,11 +26,8 @@ jobs:
         with:
           compose-file: "JobsScraper/docker-compose.yml"
       - name: Wait for specific service to finish
-        run: |
-          while [ "$(docker inspect -f '{{.State.Status}}' jobmanager 2>/dev/null)" == "running" ]; do
-            echo "Waiting for my_service_name to finish..."
-            sleep 10
-          done
+        run: docker-compose -f JobsScraper/docker-compose.yml wait jobmanager --down-project
+
       - name: Show Docker Compose logs
         run: docker-compose -f JobsScraper/docker-compose.yml logs
       
