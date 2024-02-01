@@ -56,7 +56,7 @@ class WorkableJobSpider(scrapy.Spider):
         driver.page_source
         wait = WebDriverWait(driver, 5)
     
-        clicks = 30
+        clicks = 5
         while clicks>=0:
             try:
                 clicks -= 1
