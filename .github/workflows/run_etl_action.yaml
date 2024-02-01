@@ -22,9 +22,7 @@ jobs:
           directory: JobsScraper
           file_name: .env
       - name: docker compose act
-        uses: isbang/compose-action@v1.5.1
-        with:
-          compose-file: "JobsScraper/docker-compose.yml"
+        run: docker-compose -f JobsScraper/docker-compose.yml up
       - name: Wait for specific service to finish
         run: |
           while [ "$(docker inspect -f '{{.State.Status}}' jobmanager_container 2>/dev/null)" == "running" ]; do
