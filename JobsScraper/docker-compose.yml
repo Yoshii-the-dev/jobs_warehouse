@@ -66,6 +66,8 @@ services:
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
         rest.flamegraph.enabled: true
+        APP_DB_USER: ${{ secrets.APP_DB_USER }}
+        APP_DB_PASS: ${{ secrets.APP_DB_PASS }}
     depends_on:
       data_extraction:
         condition: service_completed_successfully
