@@ -24,7 +24,7 @@ class PostgreSQLPipeline:
         retry_count = 0
         while retry_count < self.max_retries:
             try:
-                load_dotenv('.env')
+                #load_dotenv('.env')
                 POSTGRES_USER=os.environ['POSTGRES_USER']
                 POSTGRES_PASSWORD=os.environ['POSTGRES_PASSWORD']
                 connection = psycopg2.connect(f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@postgresdb_container:5432/jobs_warehouse')
