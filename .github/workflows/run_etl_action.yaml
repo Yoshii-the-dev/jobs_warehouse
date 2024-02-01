@@ -25,13 +25,12 @@ jobs:
         uses: isbang/compose-action@v1.5.1
         with:
           compose-file: "JobsScraper/docker-compose.yml"
-  #      env: 
-  #        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-  #        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-  ##        POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-  #        APP_DB_USER: ${{ secrets.APP_DB_USER }}
-  #        APP_DB_PASS: ${{ secrets.APP_DB_PASS }}
-  #        APP_DB_NAME: ${{ secrets.APP_DB_NAME }}
+      - name: Wait for specific service to finish
+        run: |
+          while [ "$(docker inspect -f '{{.State.Status}}' jobmanager 2>/dev/null)" == "running" ]; do
+            echo "Waiting for my_service_name to finish..."
+            sleep 10
+          done
       - name: Show Docker Compose logs
         run: docker-compose -f JobsScraper/docker-compose.yml logs
       
