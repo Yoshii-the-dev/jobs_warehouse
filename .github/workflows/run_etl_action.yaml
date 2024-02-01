@@ -32,4 +32,6 @@ jobs:
 
       - name: Show Docker Compose logs
         run: docker-compose -f JobsScraper/docker-compose.yml logs
+      - name: Show Docker Compose logs
+        run: docker-compose -f JobsScraper/docker-compose.yml down
       
