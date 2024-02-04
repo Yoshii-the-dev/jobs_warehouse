@@ -50,4 +50,4 @@ Fill into your credentials in the .env file, they will be later used by Docker c
 
 ----
 ### Demo of Analytical Dashboard built with Dash/Plotly
-![Alt text](github_gif.gif)
+![](https://github.com/Yoshii-the-dev/jobs_warehouse/blob/main/demo.gif)https://github.com/Yoshii-the-dev/jobs_warehouse/blob/main/demo.gif
