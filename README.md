@@ -16,7 +16,7 @@ This project focuses on aggregating applications from various job boards and it'
 Basically, the whole project is divided into several microservices for better isolation and maintenance. A well-established technology widely acknowledged for this purpose is the utilization of Docker containers. We built three custom images based on Docker files: for data extraction from job boards (Scrapy+Selenium is a great fit for our goals), for the data warehouse itself (we use PostgresDB), and for data streaming and processing (PyFlink in our case).
 
 Here is a little sketch of our architecture:
-![Alt text](image-1.png)
+![alt text](https://github.com/Yoshii-the-dev/jobs_warehouse/blob/main/arch.jpg)
 
 ### Why PostgresDB?
 It's open source and has a generous free-tier serverless provider to deploy on, read-write optimized, and well-suited for OLAP systems. We could also use some NoSQL DB, such as MongoDB, early in the pipeline to avoid schema compatibility checks.
